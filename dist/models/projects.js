@@ -58,10 +58,17 @@ __decorate([
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
-        allowNull: false,
+        allowNull: true,
     }),
     __metadata("design:type", String)
 ], Projects.prototype, "image", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Projects.prototype, "category", void 0);
 Projects = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: "projects",

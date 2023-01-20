@@ -3,10 +3,17 @@ import routes from "./routes/index";
 import connection from "./db/config";
 import { json, urlencoded } from "body-parser";
 import dotenv from "dotenv"
+import cors from "cors"
 
 dotenv.config()
 
 const app = express();
+
+app.use(
+    cors({
+        origin: "*",
+    })
+);
 
 app.use(json());
 

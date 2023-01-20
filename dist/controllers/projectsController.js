@@ -10,9 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateProject = exports.getProjectById = exports.getAllProject = exports.deleteProject = exports.createProject = void 0;
+const slug_1 = require("../helper/slug");
 const projects_1 = require("../models/projects");
 const createProject = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var projects = yield projects_1.Projects.create(Object.assign({}, req.body));
+    const { name, description, objective, tools, link, image, category } = req.body;
+    const projects = yield projects_1.Projects.create({
+        name: name,
+        slug: (0, slug_1.slug)(name),
+        description: description,
+        objective: objective,
+        tools: tools,
+        link: link,
+        image: image,
+        category: category
+    });
     return res
         .status(200)
         .json({
@@ -60,7 +71,15 @@ const getProjectById = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 exports.getProjectById = getProjectById;
 const updateProject = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    yield projects_1.Projects.update(Object.assign({}, req.body), { where: { id } });
+    const { name, description, objective, tools, link } = req.body;
+    yield projects_1.Projects.update({
+        name: name,
+        slug: (0, slug_1.slug)(name),
+        description: description,
+        objective: objective,
+        tools: tools,
+        link: link
+    }, { where: { id } });
     const updatedProjects = yield projects_1.Projects.findByPk(id);
     return res
         .status(200)

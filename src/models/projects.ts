@@ -42,7 +42,13 @@ export class Projects extends Model {
 
     @Column({
         type: DataType.STRING,
-        allowNull: false,
+        allowNull: true,
     })
     image!: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    category!: string;
 }
